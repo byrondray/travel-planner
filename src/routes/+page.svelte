@@ -18,19 +18,6 @@
     interests: string[];
   }
   
-  interface SuccessResult {
-    type: string;
-    status: number;
-    data?: {
-      destination?: string;
-      duration?: number;
-      budget?: string;
-      travelStyle?: string;
-      interests?: string;
-      planHtml?: string;
-    };
-  }
-  
   const formState: Writable<FormState> = writable({
     destination: '',
     duration: 7,
@@ -103,7 +90,6 @@
       
       return async ({ result, update }) => {
         isLoading = false;
-        console.log("Form submission result:", result);
         
         if (result.type === 'success' && result.data) {
           const planId = `travelPlan_${Date.now()}`;
@@ -117,9 +103,6 @@
             planHtml: typeof result.data.planHtml === 'string' ? result.data.planHtml : '<p>No plan content received</p>',
             date: new Date().toISOString().slice(0, 10)
           };
-          
-          console.log("Storing plan data:", planData);
-          console.log("Plan HTML length:", planData.planHtml?.length);
           
           localStorage.setItem(planId, JSON.stringify(planData));
           

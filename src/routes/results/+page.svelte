@@ -18,10 +18,7 @@
   let loadingError = '';
 
   onMount(() => {
-    console.log("Results page mounted");
-    
     const currentPlanId = localStorage.getItem('currentPlanId');
-    console.log("Current plan ID:", currentPlanId);
     
     if (!currentPlanId) {
       loadingError = "No plan ID found in local storage";
@@ -38,7 +35,6 @@
     
     try {
       travelPlan = JSON.parse(storedPlan) as TravelPlan;
-      console.log("Loaded plan:", travelPlan);
       
       if (!travelPlan.planHtml) {
         console.error("Plan HTML is missing");

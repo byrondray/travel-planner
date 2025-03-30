@@ -22,8 +22,6 @@ export const actions: Actions = {
 				return fail(400, { error: 'Missing required fields' });
 			}
 
-			console.log('Generating plan for:', destination);
-
 			try {
 				const prompt = `
           Create a detailed ${duration}-day travel itinerary for ${destination}. 
@@ -63,9 +61,6 @@ export const actions: Actions = {
 					.replace(/This HTML document provides.*$/s, '')
 					.replace(/^.*This is a.*\n/m, '');
 
-				console.log('Generated HTML plan length:', planHtml.length);
-
-				// Return the data directly without redirect
 				return {
 					planHtml,
 					destination,
